@@ -1,0 +1,68 @@
+{
+  "name": "app-backend",
+  "version": "0.1.0",
+  "description": "backend for realtime game app",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "preinstall": "([ -d .bin ] || mkdir .bin) && ([ -d build ] || mkdir build) && rm -rf build/*",
+    "clean": "rm -rf build cache/*/* npm-debug.log coverage",
+    "preclean-all": "npm run clean",
+    "clean-all": "rm -rf .bin vendor node_modules",
+    "pretest": "npm run htmlhint && npm run stylelint && npm run eslint",
+    "test": "jest --coverage",
+    "start": "nodemon ./bin/www",
+    "production": "NODE_ENV='production' node ./bin/www",
+    "tag-prepare": "grep version package.json && git describe --abbrev=0 && git status",
+    "htmlhint": "[ ! -f .htmlhintrc ] || htmlhint --ignore build/**,node_modules/**,coverage/** | grep -v 'Config loaded:'",
+    "stylelint": "[ ! -f .stylelintrc.json ] || stylelint **/*.css",
+    "stylelint-fix": "[ ! -f .stylelintrc.json ] || stylelint **/*.css --fix",
+    "eslint": "[ ! -f .eslintrc.json ] || eslint .",
+    "eslint-fix": "[ ! -f .eslintrc.json ] || eslint --fix .",
+    "docker-build": "docker-compose build",
+    "docker-push": "docker-compose push",
+    "docker-start": "docker-compose up -d",
+    "docker-stop": "docker-compose down",
+    "node1": "docker-compose up -d node-latest",
+    "node2": "docker-compose up -d node-10",
+    "node3": "docker-compose up -d node-8",
+    "test1": "docker-compose run node-latest npm test",
+    "test2": "docker-compose run node-10 npm test",
+    "test3": "docker-compose run node-8 npm test"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/coverage/**"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emsa16/XXX.git"
+  },
+  "author": "Emil Sandberg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emsa16/XXX/issues"
+  },
+  "homepage": "https://github.com/emsa16/XXX#readme",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "htmlhint": "^0.10.1",
+    "jest": "^24.1.0",
+    "nodemon": "^1.18.9",
+    "stylelint": "^9.10.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "serve-favicon": "~2.4.5"
+  }
+}

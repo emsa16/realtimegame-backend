@@ -1,0 +1,32 @@
+version: "3"
+services:
+    node-latest:
+        image: "emsa16/XXX:node-latest"
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-latest
+        ports:
+            - "8110:8099"
+        volumes:
+            - ./:/home/node/app
+            - /home/node/app/node_modules/
+    node-10:
+        image: "emsa16/XXX:node-10"
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-10
+        ports:
+            - "8100:8099"
+        volumes:
+            - ./:/home/node/app
+            - /home/node/app/node_modules/
+    node-8:
+        image: "emsa16/XXX:node-8"
+        build:
+            context: .
+            dockerfile: docker/Dockerfile-node-8
+        ports:
+            - "8080:8099"
+        volumes:
+            - ./:/home/node/app
+            - /home/node/app/node_modules/

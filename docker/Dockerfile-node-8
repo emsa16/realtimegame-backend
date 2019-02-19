@@ -1,0 +1,18 @@
+# Use an official Node runtime as a parent image
+FROM node:8-alpine
+
+# Set the working directory to /home/node/app
+WORKDIR /home/node/app
+
+# Install npm packages
+COPY package*.json ./
+RUN npm install
+
+# Make port 8099 available to the world outside this container
+EXPOSE 8099
+
+# Define environment variable
+ENV DBWEBB_PORT 8099
+
+# Run app.py when the container launches
+CMD ["npm", "start"]
