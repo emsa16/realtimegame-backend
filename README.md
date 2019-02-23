@@ -7,7 +7,9 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/emsa16/realtimegame-backend?branch=master)](https://bettercodehub.com/results/emsa16/realtimegame-backend)
 
 ## Requirements
-Node och npm behöver finnas installerade.
+
+- Node
+- npm
 
 ## Installation
 
@@ -17,27 +19,24 @@ Node och npm behöver finnas installerade.
     $ npm test
 
 ## Running the server
-DBWEBB_PORT anger vilken port servern körs på, default är 3000.
+Adding DBWEBB_PORT=XXXX before any command sets server port, default is 3000.
 
-    $ [DBWEBB_PORT=XXXX] npm start          # Startar en utvecklingsserver med nodemon
-    $ [DBWEBB_PORT=XXXX] npm run production # Startar produktionsserver
+    $ npm start                 # Runs server in development mode with nodemon (which automatically restarts server when code changes)
+    $ npm run production        # Runs server in production mode
 
 ## API
-Servern erbjuder ett enkelt JSON API med innehåll til me-sidan. JSON-svaren innehåller också anvisningar om vilka router som finns tillgängliga.
+Possible JSON REST API offering data and computations to frontend.
 
 ## Running in Docker
 
     $ npm run node1            # node latest-alpine (port 8110)
     $ npm run node2            # node 10-alpine (port 8100)
     $ npm run node3            # node 8-alpine (port 8080)
-    $ npm run docker-start     # Kör alla tre containers  (se portar ovan)
-    $ npm run docker-stop      # Stoppar alla aktiva containers
-    $ npm run docker-build     # Bygger ovan nämnda images från respektive Dockerfile
-    $ npm run test1            # Kör npm test inuti node1-containern
-    $ npm run test2            # Kör npm test inuti node2-containern
-    $ npm run test3            # Kör npm test inuti node3-containern
-
-## Ladda ner projektets Docker-image
-https://store.docker.com/community/images/emsa16/ramverk2-me
+    $ npm run docker-start     # Runs all containers (see ports above)
+    $ npm run docker-stop      # Stops all active containers
+    $ npm run docker-build     # Builds above images from their respective Dockerfile
+    $ npm run test1            # Runs npm test inside node1 container
+    $ npm run test2            # Runs npm test inside node2 container
+    $ npm run test3            # Runs npm test inside node3 container
 
 BTH 2019

@@ -22,7 +22,6 @@
     "eslint": "[ ! -f .eslintrc.json ] || eslint .",
     "eslint-fix": "[ ! -f .eslintrc.json ] || eslint --fix .",
     "docker-build": "docker-compose build",
-    "docker-push": "docker-compose push",
     "docker-start": "docker-compose up -d",
     "docker-stop": "docker-compose down",
     "node1": "docker-compose up -d node-latest",
