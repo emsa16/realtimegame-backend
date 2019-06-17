@@ -11,7 +11,8 @@
 ## Requirements
 - Node
 - npm
-
+- mongoDB up and running
+- the environment variable `JWT_SECRET` (see section **Usage** below for details)
 
 ## Installation
     $ git clone https://github.com/emsa16/realtimegame-backend.git
@@ -26,10 +27,15 @@ See below also commands for running tests in Docker.
 
 
 ## Usage
-Adding DBWEBB_PORT=XXXX before any command sets server port, default is 8080.
+The following environment variables can be set by adding these before below commands:
+- JWT_SECRET="STRING" - **REQUIRED** - used to create and authenticate JWT tokens, at least 64 random characters is recommended
+- DBWEBB_PORT=XXXX - set server port (default: 8080)
+- DBWEBB_DSN="URL" - set address to the Mongo database (default: mongodb://localhost:27017/game)
+- START_CHAT=true - start chat server as well (not when running chat as a separate process) (default: false)
 
     $ npm start                 # Runs server in development mode with nodemon (which automatically restarts server when code changes)
     $ npm run production        # Runs server in production mode
+    $ npm run start-chat        # Runs chat server as a separate process
 
 
 ## API
