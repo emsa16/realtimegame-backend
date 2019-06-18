@@ -62,7 +62,7 @@ const auth = {
         const payload = { uid: user._id };
         const token = jwt.sign(payload, jwtSecret, { expiresIn: '1h'});
 
-        console.log(token);
+        console.log("Login successful");
         return res.json({token: token, message: "Login successful"});
     },
 

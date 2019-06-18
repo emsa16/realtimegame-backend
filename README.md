@@ -6,6 +6,11 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6ae0f826a811495d302b/test_coverage)](https://codeclimate.com/github/emsa16/realtimegame-backend/test_coverage)
 [![BCH compliance](https://bettercodehub.com/edge/badge/emsa16/realtimegame-backend?branch=master)](https://bettercodehub.com/results/emsa16/realtimegame-backend)
 
+This repo is the backend half of a realtime game prototype. The frontend can be found [here](https://github.com/emsa16/realtimegame-frontend).
+
+This project consists of a web server built in Express, a [chat server](https://www.npmjs.com/package/@emsa16/chat-server) using WebSocket, a database module that uses MongoDB, and an authentication module that uses JSON Web Tokens as well as bcrypt for password encryption. The project uses Jest for tests. There are Dockerfiles available to test the project in different versions of Node.
+
+The web server is at the center of this project and offers a simple JSON API allowing for authentication and interaction with the chat server and database.
 
 
 ## Requirements
@@ -39,7 +44,9 @@ The following environment variables can be set by adding these before below comm
 
 
 ## API
-Possible JSON REST API offering data and computations to frontend.
+A JSON REST API that offers authentication and database services for the frontend part of this project.
+
+**TEMP EXPAND - LIST THE WHOLE API**
 
 
 ## Running in Docker
