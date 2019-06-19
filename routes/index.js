@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 const auth = require('../models/auth');
+const db = require('../models/db');
 
 // JSON API
 router.get("/", (req, res) => {
@@ -58,6 +59,29 @@ router.get('/secret',
     async (req, res) => {
         try {
             res.json({msg: "Secret content"});
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({message: err});
+        }
+    }
+);
+
+router.get('/player/',
+    async (req, res, next) => {
+        try {
+            auth.checkTokenRespond(req, res, next);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({message: err});
+        }
+    },
+    async (req, res) => {
+        try {
+            const uid = await auth.getIdFromToken(req.headers['x-access-token']);
+            const result = await db.findByID("users", uid, {'model': 1, 'nickname': 1, 'position': 1, '_id': 0}, 1);
+            const data = result[0];
+
+            res.json(data);
         } catch (err) {
             console.log(err);
             res.status(500).json({message: err});

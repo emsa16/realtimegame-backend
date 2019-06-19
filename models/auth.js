@@ -60,7 +60,7 @@ const auth = {
         }
 
         const payload = { uid: user._id };
-        const token = jwt.sign(payload, jwtSecret, { expiresIn: '1h'});
+        const token = jwt.sign(payload, jwtSecret, { expiresIn: '24h'});
 
         console.log("Login successful");
         return res.json({token: token, message: "Login successful"});
@@ -144,6 +144,10 @@ const auth = {
                 console.log("Missing uid");
             }
         });
+    },
+
+    getIdFromToken: async function(token) {
+        return jwt.verify(token, jwtSecret).uid;
     }
 };
 
