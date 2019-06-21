@@ -9,6 +9,10 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 
+if (!jwtSecret) {
+    console.log("Missing JWT secret!");
+}
+
 const auth = {
     register: async function(res, body) {
         const username = body.username;

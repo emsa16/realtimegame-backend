@@ -66,7 +66,7 @@ router.get('/secret',
     }
 );
 
-router.get('/player/',
+router.get('/player',
     async (req, res, next) => {
         try {
             auth.checkTokenRespond(req, res, next);
@@ -89,6 +89,40 @@ router.get('/player/',
     }
 );
 
+router.post('/player-upsert',
+    async (req, res, next) => {
+        try {
+            auth.checkTokenRespond(req, res, next);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({message: err});
+        }
+    },
+    async (req, res) => {
+        try {
+            const uid = await auth.getIdFromToken(req.headers['x-access-token']);
+            const result = await db.findByID("users", uid, {}, 1);
+            const user = result[0];
+            const existingNicks = await db.find("users", {nickname: req.body.nickname, username: {$ne: user.username}}, {}, 1);
 
+            if (existingNicks.length) {
+                res.json({status: "failed", message: "This name is already taken"});
+                return;
+            }
+
+            const data = {
+                nickname: req.body.nickname,
+                model: req.body.model,
+                position: user.position ? user.position : "7,7,r"
+            };
+
+            await db.updateOne("users", {username: user.username}, data);
+            res.json({status: "ok", message: "Player details updated"});
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({message: err});
+        }
+    }
+);
 
 module.exports = router;
