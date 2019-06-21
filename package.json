@@ -57,7 +57,7 @@
     "stylelint": "^9.10.1"
   },
   "dependencies": {
-    "@emsa16/chat-server": "^4.0.0",
+    "@emsa16/chat-server": "^5.0.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
