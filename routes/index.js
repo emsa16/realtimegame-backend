@@ -13,7 +13,9 @@ router.get("/", (req, res) => {
         title: "JSON API",
         routes: [
             "login",
-            "register"
+            "register",
+            "player",
+            "player-upsert"
         ]
     };
 

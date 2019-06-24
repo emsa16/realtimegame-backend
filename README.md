@@ -46,7 +46,19 @@ The following environment variables can be set by adding these before below comm
 ## API
 A JSON REST API that offers authentication and database services for the frontend part of this project.
 
-**TEMP EXPAND - LIST THE WHOLE API**
+- /login
+    - POST
+    - parameters: username, password
+- /register
+    - POST
+    - parameters: username, password
+- /player
+    - GET
+    - headers: x-access-token (use login token)
+- /player-upsert
+    - POST
+    - headers: x-access-token (use login token)
+    - parameters: nickname, model
 
 
 ## Running in Docker
