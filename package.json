@@ -37,7 +37,8 @@
       "**/*.js",
       "!**/node_modules/**",
       "!**/coverage/**"
-    ]
+    ],
+    "preset": "@shelf/jest-mongodb"
   },
   "repository": {
     "type": "git",
@@ -50,11 +51,13 @@
   },
   "homepage": "https://github.com/emsa16/realtimegame-backend#readme",
   "devDependencies": {
+    "@shelf/jest-mongodb": "^1.0.1",
     "eslint": "^5.12.1",
     "htmlhint": "^0.10.1",
     "jest": "^24.1.0",
     "nodemon": "^1.18.9",
-    "stylelint": "^9.10.1"
+    "stylelint": "^9.10.1",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "@emsa16/chat-server": "^5.0.0",

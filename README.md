@@ -8,7 +8,7 @@
 
 This repo is the backend half of a realtime game prototype. The frontend can be found [here](https://github.com/emsa16/realtimegame-frontend).
 
-This project consists of a web server built in Express, a [chat server](https://www.npmjs.com/package/@emsa16/chat-server) using WebSocket, a database module that uses MongoDB, and an authentication module that uses JSON Web Tokens as well as bcrypt for password encryption. The project uses Jest for tests. There are Dockerfiles available to test the project in different versions of Node.
+This project consists of a web server built in Express, a [chat server](https://www.npmjs.com/package/@emsa16/chat-server) using WebSocket, a database module that uses MongoDB, and an authentication module that uses JSON Web Tokens as well as bcrypt for password encryption. The project uses Jest and Supertest for tests. There are Dockerfiles available to test the project in different versions of Node.
 
 The web server is at the center of this project and offers a simple JSON API allowing for authentication and interaction with the chat server and database.
 
