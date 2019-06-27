@@ -14,7 +14,7 @@ var index = require('./routes/index');
 var app = express();
 
 if (process.env.START_CHAT) {
-    require('./chat-server');
+    var chatServer = require('./chat-server');
 }
 
 // if (app.get('env') === 'development') {
@@ -59,3 +59,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+if (process.env.START_CHAT) {
+    module.exports.chatServer = chatServer;
+}

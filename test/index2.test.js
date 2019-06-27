@@ -15,4 +15,5 @@ test('Simply checking that chat server is started as well', async () => {
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe('application/json');
     expect(response.text).toBe('{"title":"JSON API","routes":["login","register","player","player-upsert"]}');
+    app.chatServer.stop();
 });

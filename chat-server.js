@@ -3,3 +3,5 @@ const auth = require('./models/auth');
 const db = require('./models/db');
 
 chatServer.start("", "", "", auth, db, "game-chat");
+
+module.exports = chatServer;
