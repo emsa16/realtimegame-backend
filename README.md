@@ -18,7 +18,7 @@ This is the backend half of the project. The frontend half can be found [here](h
 5. [Tests](#tests)
 6. [Running in Docker](#running-in-docker)
 7. [CI](#ci)
-8. [Realtime](#realtime-/-npm-module)
+8. [NPM module: Realtime](#npm-module:-realtime)
 9. [Database](#database)
 
 
@@ -205,7 +205,7 @@ Code Climate rates this project a D. Looking at the comments it feels a bit unfa
 
 
 
-## Realtime / NPM module
+## NPM module: Realtime
 The realtime aspect of this project is a WebSocket server that is implemented in the external NPM [module](https://www.npmjs.com/package/@emsa16/chat-server) that the author created earlier. The module itself uses Express and WebSocket through the [ws](https://github.com/websockets/ws) module to provide a server that facilitates realtime communication to the chat and the game world in this project.
 
 The chat server can be started in one of two ways in this project:
