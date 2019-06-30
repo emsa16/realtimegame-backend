@@ -18,9 +18,8 @@ This is the backend half of the project. The frontend half can be found [here](h
 5. [Tests](#tests)
 6. [Running in Docker](#running-in-docker)
 7. [CI](#ci)
-8. [Realtime](#realtime)
+8. [Realtime](#realtime-/-npm-module)
 9. [Database](#database)
-10. [NPM module](#npm-module)
 
 
 
