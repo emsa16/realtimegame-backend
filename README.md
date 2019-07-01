@@ -47,8 +47,8 @@ This is a list of features that were specified before development began (this in
 12. The user can talk to other users by typing text into a text field and sending it to the game
 13. Messages are displayed in speech bubbles in the game world in realtime
 14. Messages are also displayed in a chat window in realtime
-15. The user can leave the game at any point, which removes their avatar from the game world and other uses cannot see it any longer. The avatar's current position is stored in a database.
-16. The user can logout of the site, which also removes their avatar from the game world, but stores details about it in a database
+15. The user can leave the game at any point, which removes their avatar from the game world and other users cannot see it any longer. The avatar's current position is stored in a database.
+16. The user can log out of the site, which also removes their avatar from the game world, but stores details about it in a database
 17. The project uses the author's [chat server module](https://www.npmjs.com/package/@emsa16/chat-server)
 18. The project can be run in Docker
 19. The project includes unit tests which cover at least 70% of the code
@@ -122,19 +122,23 @@ The chat server module has its own environment variables that can also be set in
 The web server offers a JSON REST API that facilitates authentication and database services for the frontend part of this project. Parameters are put in the request body. Here is a summary of the API:
 
 - /login
+    - authenticates an existing user and creates and returns a JWT token
     - method: POST
     - parameters: username, password
     - returns: message, token (if successful authentication)    
 - /register
+    - registers a new user
     - method: POST
     - parameters: username, password
     - return value: message
 - /player
+    - gets the player details for the current user from the database
     - method: GET
     - headers: x-access-token (use login token)
     - returns on success: model, nickname, position
     - returns on fail: message
 - /player-upsert
+    - adds or updates the user's player avatar details in the database
     - method: POST
     - headers: x-access-token (use login token)
     - parameters: nickname, model
@@ -198,7 +202,7 @@ The CI chain consists of the following tools, which all have their badges includ
 The reason for having two build tools and two code quality tools is for redundancy. The tools all work a bit differently from each other, and an issue might go past one of the tools but is then picked by another. All of the tools provide a nice user interface which is why these tools are chosen instead of other alternatives.
 
 #### Limitations
-There are some limitations to keep in mind, which are not exclusive to above tools. The build tools install the project and run the `npm test` command, but they never actually run the project, meaning that issues that are not visible to unit tests might go unnoticed, e.g. that a database is present and running or the selected ports are available. The code quality tools can only perform static code analysis, meaning that they might grade parts of the code unfairly, or miss less obvious issues.
+There are some limitations to keep in mind, which are not exclusive to above tools. The build tools install the project and run the `npm test` command, but they never actually run the project, meaning that issues that are not visible to unit tests might go unnoticed, e.g. a database is missing or not running or the selected ports are not available. The code quality tools can only perform static code analysis, meaning that they might grade parts of the code unfairly, or miss less obvious issues.
 
 #### Evaluation
 At times, builds fail because of some issue that needs to be fixed. Other times, the issue only exists in the build tool environment but nowhere else and adjustments have to be made only to satisfy the build tool, which is unfortunate. When all is going well however, these tools are not really noticed, meaning that they give some assurance that the project is working, without needing much attention from the developer. However, the risk is, especially with the code quality tools, that you become blind to the grade inside the badge and don't really think to try and fix some of the issues discovered by the tool.
@@ -227,7 +231,7 @@ As this module has a very simple implementation and the author is very familiar 
 The motivation for choosing the chat server to become the public module was that from the start, this code was created separately from the other parts, earlier in the course, so it was only natural to make this into an NPM module. There are alternatives that could have been chosen, both the authentication and the database module are fairly independent, but these modules are quite small, so it made the most sense to take the chat server, which is a little bit bigger.
 
 #### Evaluation
-The chat server module functionally needed to be extended slightly in order to work both as a regular chat server as well as facilitating player movement in the game world, so that all players get movement updates in realtime as well. The additional functionality does not affect its capability to function as a regular chat server, but the functionality had to be added in the module instead of in this project, due to the way the module is built and exposes very little to the surrounding application. The functionalities needed for the game prototype were almost identical to the original module, so the adjustments were not big.
+The chat server module functionality needed to be extended slightly in order to work both as a regular chat server as well as facilitating player movement in the game world, so that all players get movement updates in realtime as well. The additional functionality does not affect its capability to function as a regular chat server, but the functionality had to be added in the module instead of in this project, due to the way the module is built and exposes very little to the surrounding application. The functionalities needed for the game prototype were almost identical to the original module, so the adjustments were not big.
 
 The chat server module works for the purpose but it could be modified to integrate better with the rest of the application, at the moment it works best to run it as a separate service, which gives it a separate terminal console for its log.
 
