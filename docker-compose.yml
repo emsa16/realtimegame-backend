@@ -6,35 +6,57 @@ services:
             context: .
             dockerfile: docker/Dockerfile-node-latest
         environment:
+            - DBWEBB_DSN=mongodb://mongodb:27017/game
+            - JWT_SECRET=${JWT_SECRET:-su9iB2ntuqm7oFWp31LoWI4BWK11xcLlaOIgFqIj5vozjdgzwtSYmIWhEc6c1Vqe}
             - START_CHAT=${START_CHAT}
         ports:
-            - "8110:8099"
+            - "${DBWEBB_PORT:-8110}:8099"
             - "${WS_DBWEBB_PORT:-1556}:1337"
         volumes:
             - ./:/home/node/app
             - /home/node/app/node_modules/
+        links:
+            - mongodb
     node-10:
         image: "emsa16/realtimegame-backend:node-10"
         build:
             context: .
             dockerfile: docker/Dockerfile-node-10
+        environment:
+            - DBWEBB_DSN=mongodb://mongodb:27017/game
+            - JWT_SECRET=${JWT_SECRET:-su9iB2ntuqm7oFWp31LoWI4BWK11xcLlaOIgFqIj5vozjdgzwtSYmIWhEc6c1Vqe}
             - START_CHAT=${START_CHAT}
         ports:
-            - "8100:8099"
+            - "${DBWEBB_PORT:-8100}:8099"
             - "${WS_DBWEBB_PORT:-1557}:1337"
         volumes:
             - ./:/home/node/app
             - /home/node/app/node_modules/
+        links:
+            - mongodb
     node-8:
         image: "emsa16/realtimegame-backend:node-8"
         build:
             context: .
             dockerfile: docker/Dockerfile-node-8
         environment:
+            - DBWEBB_DSN=mongodb://mongodb:27017/game
+            - JWT_SECRET=${JWT_SECRET:-su9iB2ntuqm7oFWp31LoWI4BWK11xcLlaOIgFqIj5vozjdgzwtSYmIWhEc6c1Vqe}
             - START_CHAT=${START_CHAT}
         ports:
-            - "8088:8099"
+            - "${DBWEBB_PORT:-8088}:8099"
             - "${WS_DBWEBB_PORT:-1558}:1337"
         volumes:
             - ./:/home/node/app
             - /home/node/app/node_modules/
+        links:
+            - mongodb
+    mongodb:
+        image: mongo
+        environment:
+            - MONGO_DATA_DIR=/data/db
+        volumes:
+            - ./data/db:/data/db
+        ports:
+            - 27017:27017
+        command: mongod  --bind_ip_all

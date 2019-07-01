@@ -101,3 +101,5 @@ typings/
 vendor/
 /.bin/
 /cache/
+
+/data

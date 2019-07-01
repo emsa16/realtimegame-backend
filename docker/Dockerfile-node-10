@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:10-alpine
+FROM node:10
 
 # Set the working directory to /home/node/app
 WORKDIR /home/node/app
