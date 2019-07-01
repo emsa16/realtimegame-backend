@@ -100,19 +100,21 @@ As this is only a prototype, a lot of the control is in the frontend. This means
     $ npm run start-chat       # Runs chat server module as a separate process (useful to get a separate console for the chat server log)
 
     Running the server in Docker containers
-    $ npm run docker-node1     # node latest, alpine version (test on http://localhost:8110)
-    $ npm run docker-node2     # node 10, alpine version (test on http://localhost:8100)
-    $ npm run docker-node3     # node 8, alpine version (test on http://localhost:8088)
+    $ npm run docker-node1     # node latest (test on http://localhost:8110)
+    $ npm run docker-node2     # node 10 (test on http://localhost:8100)
+    $ npm run docker-node3     # node 8 (test on http://localhost:8088)
     $ npm run docker-start     # Runs all three containers (see ports above)
     $ npm run docker-stop      # Stops all active containers
     $ npm run docker-build     # Builds images for above containers from their respective Dockerfile
 
 #### Environment variables
 The following environment variables can be set by inserting these before above commands:
-- `JWT_SECRET="STRING"` - **REQUIRED** - used to create and authenticate JWT tokens, at least 64 random characters is recommended
-- `DBWEBB_PORT=XXXX` - set server port (default: 8080)
-- `DBWEBB_DSN="URL"` - set address to the Mongo database (default: mongodb://localhost:27017/game)
-- `START_CHAT=true` - start chat server at the same time as web server (not when running chat server as a separate process) (default: false)
+- `JWT_SECRET="STRING"` - **REQUIRED** - used to create and authenticate JWT tokens, at least 64 random characters is recommended. It can also be used with Docker containers, but a default value in the containers is used if the variable is not set.
+- `DBWEBB_PORT=XXXX` - set server port (default: 8080). When used with Docker containers, this sets the port that connects to the app running in the container. Default port values for the Docker containers can be seen above.
+- `DBWEBB_DSN="URL"` - set address to the Mongo database (default: mongodb://localhost:27017/game). This variable does not work with Docker containers, as Docker uses a separate container running a Mongo database (see [Running in Docker section](#running-in-docker)).
+- `START_CHAT=true` - start chat server at the same time as web server (not when running chat server as a separate process) (default: null). It can also be used with Docker containers.
+
+The chat server module has its own environment variables that can also be set in combination with these commands. See its [documentation](https://www.npmjs.com/package/@emsa16/chat-server) for more information. When used with Docker containers, the `WS_DBWEBB_PORT` variable sets the port that connects to the chat server running inside the Docker container. The default values are 1556 for node1, 1557 for node2, and 1558 for node3. Other environment variables in the chat server module cannot be used with Docker containers.
 
 
 
@@ -170,9 +172,11 @@ The tools for unit testing all work very well together and makes testing rather 
 
 
 ## Running in Docker
-    $ npm run docker-node1     # node latest-alpine (test on http://localhost:8110)
-    $ npm run docker-node2     # node 10-alpine (test on http://localhost:8100)
-    $ npm run docker-node3     # node 8-alpine (test on http://localhost:8088)
+Docker containers use their own, separate container running a Mongo database. The database is stored in `/data/db` and runs on port 27017. The MongoDB container is automatically managed by below commands.
+
+    $ npm run docker-node1     # node latest (test on http://localhost:8110)
+    $ npm run docker-node2     # node 10 (test on http://localhost:8100)
+    $ npm run docker-node3     # node 8 (test on http://localhost:8088)
 
     $ npm run docker-start     # Runs all containers (see ports above)
     $ npm run docker-stop      # Stops all active containers
