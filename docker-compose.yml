@@ -5,8 +5,11 @@ services:
         build:
             context: .
             dockerfile: docker/Dockerfile-node-latest
+        environment:
+            - START_CHAT=${START_CHAT}
         ports:
             - "8110:8099"
+            - "${WS_DBWEBB_PORT:-1556}:1337"
         volumes:
             - ./:/home/node/app
             - /home/node/app/node_modules/
@@ -15,8 +18,10 @@ services:
         build:
             context: .
             dockerfile: docker/Dockerfile-node-10
+            - START_CHAT=${START_CHAT}
         ports:
             - "8100:8099"
+            - "${WS_DBWEBB_PORT:-1557}:1337"
         volumes:
             - ./:/home/node/app
             - /home/node/app/node_modules/
@@ -25,8 +30,11 @@ services:
         build:
             context: .
             dockerfile: docker/Dockerfile-node-8
+        environment:
+            - START_CHAT=${START_CHAT}
         ports:
             - "8088:8099"
+            - "${WS_DBWEBB_PORT:-1558}:1337"
         volumes:
             - ./:/home/node/app
             - /home/node/app/node_modules/

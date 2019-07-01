@@ -11,6 +11,9 @@ RUN npm install
 # Make port 8099 available to the world outside this container
 EXPOSE 8099
 
+# Also make chat server default port available
+EXPOSE 1337
+
 # Define environment variable
 ENV DBWEBB_PORT 8099
 
