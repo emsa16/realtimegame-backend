@@ -50,7 +50,7 @@
   },
   "homepage": "https://github.com/emsa16/realtimegame-backend#readme",
   "devDependencies": {
-    "@shelf/jest-mongodb": "^1.0.1",
+    "@shelf/jest-mongodb": "^1.1.1",
     "eslint": "^5.12.1",
     "jest": "^24.1.0",
     "nodemon": "^1.18.9",
